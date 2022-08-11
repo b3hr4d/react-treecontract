@@ -17,6 +17,6 @@
     "jsx": "react-jsx"
   },
   "exclude": ["public", "node_modules", "build"],
-  "include": ["src", "scripts", "test"],
+  "include": ["src", "scripts", "test", "typechain"],
   "files": ["./hardhat.config.ts"]
 }

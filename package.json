@@ -40,6 +40,7 @@
   },
   "scripts": {
     "run-node": "npx hardhat node",
+    "deploy": "npx hardhat run ./scripts/deploy.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,10 +1,18 @@
 import { ethers } from "hardhat";
+import { UserData, UserData__factory } from "../typechain";
 
 async function main() {
-  const UserData = await ethers.getContractFactory("UserData");
-  const userData = await UserData.deploy();
+  const [owner] = await ethers.getSigners();
+
+  const UserData = (await ethers.getContractFactory(
+    "UserData"
+  )) as UserData__factory;
+  const userData = (await UserData.deploy()) as UserData;
 
   await userData.deployed();
+
+  const check = await userData.exist(owner.address);
+  console.log(check);
 
   console.log("UserData Contract: ", userData.address);
 }

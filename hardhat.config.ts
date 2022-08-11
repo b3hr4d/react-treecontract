@@ -43,6 +43,10 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:8555",
     },
   },
+  typechain: {
+    outDir: "./typechain",
+    target: "ethers-v5",
+  },
   abiExporter: {
     path: "./data/abi",
     clear: true,
