@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules.nosync
 /node_modules
 /.pnp
 .pnp.js
@@ -23,8 +22,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-node_modules.nosync
+#Hardhat files
+cache
+artifacts
+typechain-types
 
-node_modules.nosync
+node_modules
+.env
 
-node_modules.nosync
+#Hardhat files
+cache
+artifacts
+

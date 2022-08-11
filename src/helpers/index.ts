@@ -1,4 +1,4 @@
-import { address, Invest, UserStruct } from "../contract";
+import { address, Invest, UserStruct } from "../contracts";
 
 export const randomAddress = (id: number | string) => `0x${numBeetween(+id)}`;
 

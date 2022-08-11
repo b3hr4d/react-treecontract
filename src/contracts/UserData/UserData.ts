@@ -1,5 +1,12 @@
-import { address, emit, Require } from "../types";
-import { Address, Invest, Users, UserStruct } from "../types/UserStruct";
+import {
+  address,
+  Address,
+  emit,
+  Invest,
+  Require,
+  Users,
+  UserStruct,
+} from "../types";
 
 export default class UserData {
   users: Users = {};

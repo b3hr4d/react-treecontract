@@ -6,7 +6,7 @@ import { RawNodeDatum } from "react-d3-tree/lib/types/common";
 import "./App.css";
 import Header from "./components/Header";
 import TButton from "./components/TButton";
-import { address } from "./contract";
+import { address } from "./contracts";
 import useUserContract from "./hooks/useContract";
 
 function App() {

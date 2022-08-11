@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import UserData, { address, Users } from "../contract";
+import UserData, { address, Users } from "../contracts";
 import { investMaker, randomAddress, throttle, userInit } from "../helpers";
 
 interface UserState {
