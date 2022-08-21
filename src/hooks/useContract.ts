@@ -8,10 +8,11 @@ interface UserState {
   total: number;
 }
 
-const useContract = () => {
+const useUserContract = () => {
   const { current: contract } = useRef(
     new UserData("0x0", userInit("0xstart"))
   );
+
   const [{ users, userLength, total }, setUsers] = useState<UserState>({
     users: { ...contract.users },
     total: contract.total,
@@ -20,11 +21,11 @@ const useContract = () => {
 
   const updateStates = useCallback(() => {
     console.log("UpdateStates");
-    setUsers({
+    setUsers(() => ({
       users: { ...contract.users },
       total: contract.total,
       userLength: Object.keys(contract.users).length,
-    });
+    }));
   }, [contract]);
 
   const findTree = useCallback(
@@ -102,4 +103,4 @@ const useContract = () => {
   };
 };
 
-export default useContract;
+export default useUserContract;
