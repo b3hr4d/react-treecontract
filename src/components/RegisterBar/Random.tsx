@@ -1,6 +1,6 @@
-import { Box, Card } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 import TButton from "elements/TButton";
-import useUserContract from "hooks/useContract";
+import useUserContract from "hooks/useUserContract";
 
 interface RandomProps {}
 
@@ -9,9 +9,9 @@ const Random: React.FC<RandomProps> = () => {
 
   return (
     <Card>
-      <Box p={1} textAlign="center">
+      <Stack p={1} direction="row" justifyContent="center" spacing={1}>
         <TButton onClick={() => random()}>Random</TButton>
-      </Box>
+      </Stack>
     </Card>
   );
 };

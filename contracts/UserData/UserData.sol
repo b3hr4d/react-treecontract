@@ -2,8 +2,11 @@
 pragma solidity ^0.8.9;
 
 import "./Secure.sol";
+import "./64Math.sol";
 
 contract UserData is Secure {
+  using Math for uint64;
+
   event Registered(address indexed user, address indexed ref, uint256 amount);
   event ReferralReceived(address indexed user, address from, uint256 amount);
 
@@ -47,7 +50,7 @@ contract UserData is Secure {
     if (users[user].left == address(0)) users[user].left = _msgSender();
     else users[user].right = _msgSender();
 
-    users[user].refAmount = users[user].refAmount + refPercent(amount);
+    users[user].refAmount = users[user].refAmount.add(refPercent(amount));
   }
 
   function refPercent(uint64 amount) public pure returns (uint64) {
@@ -59,14 +62,10 @@ contract UserData is Secure {
 
     (uint64 left, uint64 right) = findLegsAmount(user);
 
-    return users[user].refAmount + left + right;
+    return users[user].refAmount.add(left).add(right);
   }
 
-  function findLegsAmount(address user)
-    public
-    view
-    returns (uint64 left, uint64 right)
-  {
+  function findLegsAmount(address user) public view returns (uint64 left, uint64 right) {
     left = findAmount(users[user].left);
     right = findAmount(users[user].right);
   }

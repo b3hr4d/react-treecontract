@@ -1,11 +1,12 @@
 import { AppBar, Icon, IconButton, Toolbar, Typography } from "@mui/material";
+import useUserData from "context/hooks/useUserData";
 import TButton from "elements/TButton";
-import useUserContract from "hooks/useContract";
+import { toUsd } from "helpers";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const { total } = useUserContract();
+  const [{ total }] = useUserData();
 
   return (
     <AppBar position="relative">
@@ -15,10 +16,7 @@ const Header: React.FC<HeaderProps> = () => {
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Tree&nbsp;
-          {total?.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD",
-          })}
+          {toUsd(total)}
         </Typography>
         <TButton color="error" onClick={() => window.location.reload()}>
           Reset

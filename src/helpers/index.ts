@@ -18,3 +18,12 @@ export const throttle = (func: () => void, wait = 300) => {
   clearTimeout(timer);
   timer = setTimeout(() => func(), wait);
 };
+
+export const toUsd = (value = 0, show = false) => {
+  return value.toLocaleString(
+    "en",
+    show
+      ? { style: "currency", currency: "USD", maximumFractionDigits: 0 }
+      : undefined
+  );
+};

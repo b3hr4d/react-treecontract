@@ -1,12 +1,12 @@
 import { Models } from "@rematch/core";
-import { common } from "./common";
 import { setting } from "./setting";
 import { theme } from "./theme";
+import { userData } from "./userData";
 
 export interface RootModel extends Models<RootModel> {
   theme: typeof theme;
-  common: typeof common;
+  userData: typeof userData;
   setting: typeof setting;
 }
 
-export const models: RootModel = { theme, common, setting };
+export const models: RootModel = { theme, userData, setting };

@@ -14,6 +14,9 @@ export interface HeaderSetter {
   setBgColor: SetColorFunction;
 }
 
-export interface GlobalSetting {
-  setShowAddress: (show: boolean) => void;
+export interface UserDataFunction {
+  setShowAddress: () => void;
+  setShowDetails: () => void;
+  setUser: (user: string) => void;
+  Register: (user: string, referrer: string) => void;
 }

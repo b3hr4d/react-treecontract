@@ -1,5 +1,4 @@
-import { Box, Grid } from "@mui/material";
-import TGridContainer from "elements/TGridContainer";
+import { Box, Stack } from "@mui/material";
 
 import Loop from "./Loop";
 import Random from "./Random";
@@ -10,17 +9,15 @@ interface RegisterProps {}
 const RegisterBar: React.FC<RegisterProps> = () => {
   return (
     <Box m={1}>
-      <TGridContainer>
-        <Grid item xs={12} sm={4}>
-          <Register />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Random />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Loop />
-        </Grid>
-      </TGridContainer>
+      <Stack
+        spacing={1}
+        direction={{ xs: "column", sm: "row" }}
+        justifyContent="space-between"
+      >
+        <Register />
+        <Random />
+        <Loop />
+      </Stack>
     </Box>
   );
 };
