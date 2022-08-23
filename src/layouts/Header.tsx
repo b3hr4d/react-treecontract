@@ -1,15 +1,15 @@
 import { AppBar, Icon, IconButton, Toolbar, Typography } from "@mui/material";
-import useUserData from "context/hooks/useUserData";
+import userData from "context/hooks/useUserData";
 import TButton from "elements/TButton";
 import { toUsd } from "helpers";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const [{ total }] = useUserData();
+  const { total } = userData();
 
   return (
-    <AppBar position="relative">
+    <AppBar position="fixed">
       <Toolbar>
         <IconButton size="large" edge="start" color="inherit" aria-label="menu">
           <Icon>account_tree</Icon>

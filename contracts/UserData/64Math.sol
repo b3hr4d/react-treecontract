@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.9;
 
 // CAUTION
 // This version of Math should only be used with Solidity 0.8 or later,
@@ -31,10 +31,5 @@ library Math {
 
   function toHours(uint64 a) internal pure returns (uint64) {
     return div(a, 1 hours);
-  }
-
-  function toUint64(uint256 value) internal pure returns (uint64) {
-    require(value <= type(uint64).max, "Math: OVERFLOW");
-    return uint64(value);
   }
 }

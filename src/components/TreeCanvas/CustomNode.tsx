@@ -1,25 +1,29 @@
 import { Box, Card, Collapse, Icon, Typography } from "@mui/material";
-import { blue } from "@mui/material/colors";
 import { Stack } from "@mui/system";
+import useGlobal, { resetTree, setUser } from "context/hooks/useGlobal";
 import { toUsd } from "helpers";
-import useUserTree from "hooks/useUserTree";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CustomNodeProps } from "./Types";
 
 const CustomNode: React.FC<CustomNodeProps> = ({
   nodeDatum: { __rd3t, attributes, children, name, invest },
   toggleNode,
 }) => {
-  const { showAddress, showDetails, setUser } = useUserTree();
+  const { showAddress, color, showDetails } = useGlobal();
   const [open, setOpen] = useState(showDetails);
+
+  const changeUser = useCallback(() => {
+    resetTree();
+    setUser(name);
+  }, [name]);
 
   useEffect(() => {
     setOpen(showDetails);
   }, [showDetails]);
 
   const bgcolor = useMemo(
-    () => (children ? blue[300] : "ActiveCaption"),
-    [children]
+    () => (children ? color[200] : "ActiveCaption"),
+    [children, color]
   );
 
   const total = useMemo(
@@ -39,7 +43,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({
           <Icon onClick={toggleNode} fontSize="small">
             {__rd3t.collapsed ? "keyboard_arrow_right" : "keyboard_arrow_down"}
           </Icon>
-          <Typography fontWeight="500" onClick={() => setUser(name)}>
+          <Typography fontWeight="500" onClick={changeUser}>
             {showAddress ? name : toUsd(total, true)}
           </Typography>
           <Icon onClick={() => setOpen((prev) => !prev)} fontSize="small">

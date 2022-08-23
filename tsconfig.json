@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
+    "module": "CommonJS",
     "lib": ["dom", "dom.iterable", "esnext"],
     "noImplicitAny": false,
     "noUnusedParameters": false,
@@ -12,7 +13,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -21,6 +21,6 @@
     "baseUrl": "src"
   },
   "exclude": ["node_modules"],
-  "include": ["./src", "./scripts", "./test", "./typechain"],
+  "include": ["./src", "./scripts", "./test"],
   "files": ["./hardhat.config.ts"]
 }

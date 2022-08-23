@@ -1,12 +1,14 @@
 import { Models } from "@rematch/core";
-import { setting } from "./setting";
-import { theme } from "./theme";
-import { userData } from "./userData";
+import { userData } from "../hooks/userData";
+import { contract } from "./contract";
+import { global } from "./global";
+import { wallet } from "./wallet";
 
 export interface RootModel extends Models<RootModel> {
-  theme: typeof theme;
   userData: typeof userData;
-  setting: typeof setting;
+  contract: typeof contract;
+  wallet: typeof wallet;
+  global: typeof global;
 }
 
-export const models: RootModel = { theme, userData, setting };
+export const models: RootModel = { wallet, global, userData, contract };

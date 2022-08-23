@@ -1,16 +1,18 @@
-import { Box, FormControlLabel, Stack, Switch } from "@mui/material";
-import useUserData from "context/hooks/useUserData";
+import { FormControlLabel, Stack, Switch } from "@mui/material";
+import useGlobal, {
+  resetTree,
+  setUser,
+  setUserAddress,
+  setUserDetails,
+} from "context/hooks/useGlobal";
 import TButton from "elements/TButton";
 import TInput from "elements/TInput";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface ControllerProps {}
 
 const Controller: React.FC<ControllerProps> = () => {
-  const [
-    { showAddress, showDetails, user },
-    { setShowAddress, setUser, setShowDetails },
-  ] = useUserData();
+  const { showAddress, showDetails, user } = useGlobal();
 
   const [search, setSearch] = useState(user);
 
@@ -18,38 +20,48 @@ const Controller: React.FC<ControllerProps> = () => {
     setSearch(user);
   }, [user]);
 
+  const searchHandler = useCallback(() => {
+    setUser(search);
+    resetTree();
+  }, [search]);
+
   return (
-    <Box m={1}>
+    <Stack
+      direction={{ xs: "column", sm: "row" }}
+      justifyContent="space-between"
+      p={1}
+    >
+      <Stack flex={6} direction="row" justifyContent="center" spacing={1}>
+        <TInput
+          type="text"
+          label="Search"
+          placeholder="search"
+          value={search || user}
+          onClose={() => setSearch("0x0")}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <TButton onClick={searchHandler}>Search</TButton>
+      </Stack>
       <Stack
-        spacing={1}
-        direction={{ xs: "column", sm: "row" }}
+        flex={6}
+        direction="row"
         justifyContent="space-between"
+        spacing={1}
       >
-        <Stack p={1} direction="row" justifyContent="center" spacing={1}>
-          <TInput
-            type="text"
-            label="Search"
-            placeholder="search"
-            value={search || user}
-            onClose={() => setSearch("0x0")}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <TButton onClick={() => setUser(search)}>Search</TButton>
-        </Stack>
         <FormControlLabel
           control={<Switch color="primary" checked={showAddress} />}
-          label="Show Address"
+          label="Address"
           labelPlacement="start"
-          onClick={setShowAddress}
+          onClick={setUserAddress}
         />
         <FormControlLabel
           control={<Switch color="primary" checked={showDetails} />}
-          label="Show Details"
+          label="Details"
           labelPlacement="start"
-          onClick={setShowDetails}
+          onClick={setUserDetails}
         />
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 

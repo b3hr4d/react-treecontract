@@ -1,5 +1,7 @@
 import { RawNode } from "components/TreeCanvas/Types";
+import useGlobal from "context/hooks/useGlobal";
 import useUserData from "context/hooks/useUserData";
+
 import { address } from "contracts";
 import useUserContract from "hooks/useUserContract";
 import { useMemo } from "react";
@@ -7,7 +9,8 @@ import { RawNodeDatum } from "react-d3-tree/lib/types/common";
 
 const useUserTree = () => {
   const { findTree } = useUserContract();
-  const [{ user, users, ...rest }, useFunction] = useUserData();
+  const { users } = useUserData();
+  const { user } = useGlobal();
 
   const data = useMemo(() => {
     const findTrees = (name: string) => {
@@ -30,10 +33,11 @@ const useUserTree = () => {
       if (address() !== right) obj.children?.push(findTrees(right));
       return obj;
     };
+
     return findTrees(user) as RawNodeDatum;
   }, [user, users, findTree]);
 
-  return { data, ...rest, ...useFunction };
+  return data;
 };
 
 export default useUserTree;

@@ -44,16 +44,25 @@ const config: HardhatUserConfig = {
     },
   },
   typechain: {
-    outDir: "./typechain",
+    outDir: "./src/typechain",
     target: "ethers-v5",
   },
-  abiExporter: {
-    path: "./data/abi",
-    clear: true,
-    flat: true,
-    only: [":ERC20$"],
-    spacing: 2,
-  },
+  abiExporter: [
+    {
+      path: "./abi/pretty",
+      pretty: true,
+    },
+    {
+      path: "./src/contracts",
+      format: "minimal",
+      clear: true,
+      only: ["UserData.sol"],
+      rename: (_: string, contractName: string) =>
+        `${contractName}/${contractName}`,
+      runOnCompile: true,
+      pretty: false,
+    },
+  ],
   solidity: {
     compilers: [
       {

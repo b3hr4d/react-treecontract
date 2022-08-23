@@ -1,5 +1,5 @@
 import { Card, Stack } from "@mui/material";
-import { RootState } from "context/store";
+import { RootState } from "context/models/store";
 import TButton from "elements/TButton";
 import TInput from "elements/TInput";
 import useUserContract from "hooks/useUserContract";

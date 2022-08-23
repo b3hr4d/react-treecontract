@@ -1,23 +1,10 @@
+import useGlobal, { setTranslate } from "context/hooks/useGlobal";
 import { throttle } from "helpers";
-import { useLayoutEffect, useRef, useState } from "react";
-import { Point } from "react-d3-tree/lib/types/common";
+import { useLayoutEffect, useRef } from "react";
 
-interface Translate extends Point {
-  height: number;
-}
-
-type CenteredHook = () => [
-  Translate,
-  React.MutableRefObject<HTMLDivElement | undefined>
-];
-
-export const useCenteredTree: CenteredHook = () => {
+export const useCenteredTree = () => {
   const containerElem = useRef<HTMLDivElement>();
-  const [translate, setTranslate] = useState<Translate>({
-    x: 0,
-    y: 0,
-    height: 0,
-  });
+  const { translate, loading } = useGlobal();
 
   useLayoutEffect(() => {
     const resize = () => {
@@ -30,6 +17,7 @@ export const useCenteredTree: CenteredHook = () => {
           x: width / 2,
           y: height / 12,
           height: innerHeight - top - 8,
+          width,
         });
       }
     };
@@ -40,5 +28,5 @@ export const useCenteredTree: CenteredHook = () => {
     return () => window.removeEventListener("resize", () => throttle(resize));
   }, []);
 
-  return [translate, containerElem];
+  return { translate, loading, containerElem };
 };

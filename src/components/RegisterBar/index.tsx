@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
 import Loop from "./Loop";
 import Random from "./Random";
@@ -8,17 +8,16 @@ interface RegisterProps {}
 
 const RegisterBar: React.FC<RegisterProps> = () => {
   return (
-    <Box m={1}>
-      <Stack
-        spacing={1}
-        direction={{ xs: "column", sm: "row" }}
-        justifyContent="space-between"
-      >
-        <Register />
-        <Random />
-        <Loop />
-      </Stack>
-    </Box>
+    <Stack
+      my={1}
+      spacing={1}
+      direction={{ xs: "column", sm: "row" }}
+      justifyContent="space-between"
+    >
+      <Register />
+      <Random />
+      <Loop />
+    </Stack>
   );
 };
 
