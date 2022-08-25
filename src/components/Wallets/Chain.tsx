@@ -1,29 +1,31 @@
-import type { Web3ReactHooks } from "@web3-react/core";
-import { CHAINS } from "./chains";
+import { Box, Typography } from '@mui/material'
+import type { Web3ReactHooks } from '@web3-react/core'
+import { CHAINS } from '../../context/models/provider/chains'
 
 export function Chain({
   chainId,
 }: {
-  chainId: ReturnType<Web3ReactHooks["useChainId"]>;
+  chainId: ReturnType<Web3ReactHooks['useChainId']>
 }) {
-  if (chainId === undefined) return null;
+  if (chainId === undefined) return null
 
-  const name = chainId ? CHAINS[chainId]?.name : undefined;
-
-  if (name) {
-    return (
-      <div>
-        Chain:{" "}
-        <b>
-          {name} ({chainId})
-        </b>
-      </div>
-    );
-  }
+  const name = chainId ? CHAINS[chainId]?.name : undefined
 
   return (
-    <div>
-      Chain Id: <b>{chainId}</b>
-    </div>
-  );
+    <Box>
+      {name ? (
+        <Typography>
+          Chain:&nbsp;
+          <b>
+            {name} ({chainId})
+          </b>
+        </Typography>
+      ) : (
+        <Typography>
+          Chain Id:&nbsp;
+          <b>{chainId}</b>
+        </Typography>
+      )}
+    </Box>
+  )
 }

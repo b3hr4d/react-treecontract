@@ -1,40 +1,40 @@
-import { formatEther } from "@ethersproject/units";
-import type { Web3ReactHooks } from "@web3-react/core";
-import useBalances from "hooks/useBalances";
+import { formatEther } from '@ethersproject/units'
+import { List, ListItem, Typography } from '@mui/material'
+import { Stack } from '@mui/system'
+import type { Web3ReactHooks } from '@web3-react/core'
+import { getEllipsisAdd } from 'helpers'
+import useBalances from 'hooks/useBalances'
 
-export function Accounts({
+interface AccountsProps {
+  accounts: ReturnType<Web3ReactHooks['useAccounts']>
+  provider: ReturnType<Web3ReactHooks['useProvider']>
+  ENSNames?: ReturnType<Web3ReactHooks['useENSNames']>
+}
+
+export const Accounts: React.FC<AccountsProps> = ({
   accounts,
   provider,
   ENSNames,
-}: {
-  accounts: ReturnType<Web3ReactHooks["useAccounts"]>;
-  provider: ReturnType<Web3ReactHooks["useProvider"]>;
-  ENSNames: ReturnType<Web3ReactHooks["useENSNames"]>;
-}) {
-  const balances = useBalances(provider, accounts);
+}) => {
+  const balances = useBalances(provider, accounts)
 
-  if (accounts === undefined) return null;
+  if (accounts === undefined) return null
 
   return (
-    <div>
-      Accounts:{" "}
-      <b>
-        {accounts.length === 0
-          ? "None"
-          : accounts?.map((account, i) => (
-              <ul
-                key={account}
-                style={{
-                  margin: 0,
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {ENSNames?.[i] ?? account}
-                {balances?.[i] ? ` (Ξ${formatEther(balances[i])})` : null}
-              </ul>
-            ))}
-      </b>
-    </div>
-  );
+    <Stack direction="row" alignItems="center">
+      <Typography>Accounts:&nbsp;</Typography>
+      <List>
+        <Typography fontWeight="bold">
+          {accounts.length === 0
+            ? 'None'
+            : accounts?.map((account, i) => (
+                <ListItem disablePadding key={account}>
+                  {ENSNames?.[i] ?? getEllipsisAdd(account)}
+                  {balances?.[i] ? ` (Ξ${formatEther(balances[i])})` : null}
+                </ListItem>
+              ))}
+        </Typography>
+      </List>
+    </Stack>
+  )
 }

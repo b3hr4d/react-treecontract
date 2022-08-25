@@ -1,23 +1,22 @@
-import { Card, Stack } from "@mui/material";
-import { RootState } from "context/models/store";
-import TButton from "elements/TButton";
-import TInput from "elements/TInput";
-import useUserContract from "hooks/useUserContract";
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { Card, Stack } from '@mui/material'
+import useDatabase from 'context/hooks/useDatabase'
+import TButton from 'elements/TButton'
+import TInput from 'elements/TInput'
+import useUserContract from 'hooks/useUserContract'
+import { ChangeEvent, useState } from 'react'
 
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = () => {
-  const [ref, setRef] = useState(0);
+  const [ref, setRef] = useState(0)
 
-  const { register } = useUserContract();
-  const { userLength } = useSelector((state: RootState) => state.userData);
+  const { register } = useUserContract()
+  const { userLength } = useDatabase()
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.valueAsNumber;
-    if (value < userLength) setRef(value);
-  };
+    const value = e.currentTarget.valueAsNumber
+    if (value < userLength) setRef(value)
+  }
 
   return (
     <Card>
@@ -33,7 +32,7 @@ const Register: React.FC<RegisterProps> = () => {
         <TButton onClick={() => register(ref)}>Register</TButton>
       </Stack>
     </Card>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

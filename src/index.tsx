@@ -1,19 +1,18 @@
-import {
-  createTheme,
-  ThemeProvider as MuiProvider,
-} from "@mui/material/styles";
-import { Buffer } from "buffer";
-import useGlobal from "context/hooks/useGlobal";
-import { store } from "context/models/store";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import App from "./App";
+import { createTheme, ThemeProvider as MuiProvider } from '@mui/material/styles'
+import { useWeb3React, Web3ReactProvider } from '@web3-react/core'
+import { Buffer } from 'buffer'
+import store from 'context'
+import useSettings from 'context/hooks/useSettings'
+import connectors from 'context/models/provider/connectors'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
+import App from './App'
 
-window.Buffer = window.Buffer || Buffer;
+window.Buffer = window.Buffer || Buffer
 
 const ThemeProvider = (props: any) => {
-  const { color } = useGlobal();
+  const { color } = useSettings()
 
   const theme = createTheme({
     palette: {
@@ -21,18 +20,30 @@ const ThemeProvider = (props: any) => {
         main: color[700],
       },
     },
-  });
-  return <MuiProvider theme={theme} {...props} />;
-};
+  })
+  return <MuiProvider theme={theme} {...props} />
+}
 
-const root = createRoot(document.getElementById("root") as HTMLDivElement);
+const Web3Provider = ({ children }) => {
+  const { connector } = useWeb3React()
+
+  console.log(connector.provider)
+
+  return children
+}
+
+const root = createRoot(document.getElementById('root') as HTMLDivElement)
 
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <Web3ReactProvider connectors={Object.values(connectors)}>
+        <Web3Provider>
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
+        </Web3Provider>
+      </Web3ReactProvider>
     </Provider>
-  </StrictMode>
-);
+  </StrictMode>,
+)

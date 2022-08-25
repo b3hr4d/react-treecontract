@@ -1,12 +1,12 @@
-import { AppBar, Icon, IconButton, Toolbar, Typography } from "@mui/material";
-import userData from "context/hooks/useUserData";
-import TButton from "elements/TButton";
-import { toUsd } from "helpers";
+import { AppBar, Icon, IconButton, Toolbar, Typography } from '@mui/material'
+import userData from 'context/hooks/useDatabase'
+import TButton from 'elements/TButton'
+import { toUsd } from 'helpers'
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const { total } = userData();
+  const { total } = userData()
 
   return (
     <AppBar position="fixed">
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = () => {
         </TButton>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

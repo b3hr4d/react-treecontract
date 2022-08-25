@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import type { Web3ReactHooks } from '@web3-react/core'
 
 export function Status({
@@ -10,19 +11,19 @@ export function Status({
   error?: Error
 }) {
   return (
-    <div>
+    <Typography mb={1}>
       {error ? (
-        <>
+        <span>
           🔴 {error.name ?? 'Error'}
           {error.message ? `: ${error.message}` : null}
-        </>
+        </span>
       ) : isActivating ? (
-        <>🟡 Connecting</>
+        '🟡 Connecting'
       ) : isActive ? (
-        <>🟢 Connected</>
+        '🟢 Connected'
       ) : (
-        <>⚪️ Disconnected</>
+        '⚪️ Disconnected'
       )}
-    </div>
+    </Typography>
   )
 }

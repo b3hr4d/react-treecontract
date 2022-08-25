@@ -1,35 +1,35 @@
-import { Box, Card, Collapse, Icon, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
-import useGlobal, { resetTree, setUser } from "context/hooks/useGlobal";
-import { toUsd } from "helpers";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { CustomNodeProps } from "./Types";
+import { Box, Card, Collapse, Icon, Typography } from '@mui/material'
+import { Stack } from '@mui/system'
+import useSettings, { resetTree, setUser } from 'context/hooks/useSettings'
+import { toUsd } from 'helpers'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { CustomNodeProps } from './Types'
 
 const CustomNode: React.FC<CustomNodeProps> = ({
   nodeDatum: { __rd3t, attributes, children, name, invest },
   toggleNode,
 }) => {
-  const { showAddress, color, showDetails } = useGlobal();
-  const [open, setOpen] = useState(showDetails);
+  const { showAddress, color, showDetails } = useSettings()
+  const [open, setOpen] = useState(showDetails)
 
   const changeUser = useCallback(() => {
-    resetTree();
-    setUser(name);
-  }, [name]);
+    resetTree()
+    setUser(name)
+  }, [name])
 
   useEffect(() => {
-    setOpen(showDetails);
-  }, [showDetails]);
+    setOpen(showDetails)
+  }, [showDetails])
 
   const bgcolor = useMemo(
-    () => (children ? color[200] : "ActiveCaption"),
-    [children, color]
-  );
+    () => (children ? color[200] : 'ActiveCaption'),
+    [children, color],
+  )
 
   const total = useMemo(
     () => invest?.reduce((all, inv) => all + inv.amount, 0),
-    [invest]
-  );
+    [invest],
+  )
 
   return (
     <foreignObject width={130} height={150} x={-65} y={-25}>
@@ -41,13 +41,13 @@ const CustomNode: React.FC<CustomNodeProps> = ({
           justifyContent="space-between"
         >
           <Icon onClick={toggleNode} fontSize="small">
-            {__rd3t.collapsed ? "keyboard_arrow_right" : "keyboard_arrow_down"}
+            {__rd3t.collapsed ? 'keyboard_arrow_right' : 'keyboard_arrow_down'}
           </Icon>
           <Typography fontWeight="500" onClick={changeUser}>
             {showAddress ? name : toUsd(total, true)}
           </Typography>
           <Icon onClick={() => setOpen((prev) => !prev)} fontSize="small">
-            {open ? "info" : "info_outlined"}
+            {open ? 'info' : 'info_outlined'}
           </Icon>
         </Stack>
       </Card>
@@ -71,7 +71,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({
         </Collapse>
       ) : null}
     </foreignObject>
-  );
-};
+  )
+}
 
-export default CustomNode;
+export default CustomNode
