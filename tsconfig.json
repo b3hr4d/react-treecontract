@@ -18,5 +18,6 @@
     "isolatedModules": true,
     "suppressImplicitAnyIndexErrors": true,
     "noEmit": true
-  }
+  },
+  "exclude": ["**/*.min.ts"]
 }

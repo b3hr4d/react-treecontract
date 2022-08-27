@@ -5,9 +5,9 @@ import useSettings, {
   setUserAddress,
   setUserDetails,
 } from 'context/hooks/useSettings'
-import TButton from 'elements/TButton'
-import TInput from 'elements/TInput'
 import { useCallback, useEffect, useState } from 'react'
+import TButton from 'theme/elements/TButton'
+import TInput from 'theme/elements/TInput'
 
 interface ControllerProps {}
 

@@ -1,31 +1,14 @@
-import { network } from 'context/data/provider/connectors'
-import {
-  useAccount,
-  useChainId,
-  useIsActivating,
-  useIsActive,
-  useProvider,
-} from 'context/hooks'
-import { useCallback, useEffect, useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
+import { useCallback, useState } from 'react'
 
 const useChainSwitch = () => {
-  const chainId = useChainId()
-  const account = useAccount()
-  const isActivating = useIsActivating()
-
-  const isActive = useIsActive()
-
-  const provider = useProvider()
+  const { chainId, account, isActivating, isActive, provider, connector } =
+    useWeb3React()
 
   const [error, setError] = useState<Error>()
   // attempt to connect eagerly on mount
-  useEffect(() => {
-    void network.activate().catch(() => {
-      console.debug('Failed to connect to network')
-    })
-  }, [])
 
-  const [desiredChainId, setDesiredChainId] = useState<number>(1)
+  const [desiredChainId, setDesiredChainId] = useState<number>(31337)
 
   const switchChain = useCallback(
     (desiredChainId: number) => {
@@ -41,12 +24,9 @@ const useChainSwitch = () => {
         setError(undefined)
         return
       }
-      network
-        .activate(desiredChainId === -1 ? undefined : desiredChainId)
-        .then(() => setError(undefined))
-        .catch(setError)
+      connector.activate(desiredChainId === -1 ? undefined : desiredChainId)
     },
-    [chainId, setError],
+    [chainId, connector],
   )
 
   return {

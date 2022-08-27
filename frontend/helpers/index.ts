@@ -3,7 +3,7 @@ import { MetaMask } from '@web3-react/metamask'
 import { Network } from '@web3-react/network'
 import type { Connector } from '@web3-react/types'
 import { WalletConnect } from '@web3-react/walletconnect'
-import { address, Invest, UserStruct } from '../contracts'
+import { address, UserStruct } from '../contracts'
 
 export function getName(connector: Connector) {
   if (connector instanceof MetaMask) return 'MetaMask'
@@ -17,8 +17,19 @@ export const randomAddress = (id: number | string) => `0x${numBeetween(+id)}`
 
 export const randomValue = (multi = 10000) => Math.floor(Math.random() * multi)
 
-export const investMaker = () =>
-  new Invest(randomValue(), randomValue(), randomValue(), 10000)
+export const investMaker = () => [
+  randomValue(),
+  randomValue(),
+  randomValue(),
+  randomValue(),
+]
+
+export const jsInvestMaker = () => ({
+  amount: randomValue(),
+  period: randomValue(),
+  reward: randomValue(),
+  startTime: randomValue(),
+})
 
 export const numBeetween = (max: number, min = 0) =>
   Math.floor(Math.random() * (max - min + 1) + min)

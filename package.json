@@ -17,6 +17,7 @@
     "hardhat": "^2.10.1",
     "hardhat-abi-exporter": "^2.10.0",
     "hardhat-gas-reporter": "^1.0.8",
+    "hardhat-watcher": "^2.5.0",
     "solidity-coverage": "^0.7.21",
     "typechain": "^8.1.0",
     "typescript": "^4.7.4"
@@ -28,12 +29,11 @@
   },
   "scripts": {
     "run-node": "npx hardhat node",
-    "watch": "npx hardhat node",
+    "watch": "npx hardhat watch deploy",
     "compile": "npx hardhat compile",
     "deploy": "npx hardhat run ./scripts/deploy.ts",
-    "start": "cd ./frontend && react-scripts start",
-    "build": "cd ./frontend && react-scripts build",
-    "test": "cd ./frontend && react-scripts test",
-    "eject": "rcd ./frontend && eact-scripts eject"
+    "dev": "cd ./frontend && yarn dev",
+    "start": "cd ./frontend && yarn start",
+    "build": "cd ./frontend && yarn build"
   }
 }

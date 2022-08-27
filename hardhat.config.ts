@@ -6,6 +6,7 @@ import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-etherscan'
 import '@typechain/hardhat'
 import 'hardhat-abi-exporter'
+import 'hardhat-watcher'
 
 dotEnvConfig()
 
@@ -14,10 +15,15 @@ const BINANCE_API_KEY = process.env.BINANCE_API_KEY
 const INFURA_KOVAN = process.env.INFURA_KOVAN
 
 const config: HardhatUserConfig = {
-  defaultNetwork: 'hardhat',
+  defaultNetwork: 'localhost',
   networks: {
     localhost: {
       url: 'http://127.0.0.1:8545',
+      accounts: [
+        '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
+        '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d',
+        '0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a',
+      ],
     },
     testnet: {
       url: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
@@ -43,21 +49,44 @@ const config: HardhatUserConfig = {
       url: 'http://127.0.0.1:8555',
     },
   },
+  watcher: {
+    deploy: {
+      tasks: [
+        'clean',
+        { command: 'run', params: { script: './scripts/deploy.ts' } },
+        // {
+        //   command: 'test',
+        //   params: { noCompile: true, testFiles: ['testfile.ts'] },
+        // },
+      ],
+      files: ['./contracts'],
+      ignoredFiles: ['**/.vscode'],
+      verbose: true,
+      clearOnStart: true,
+      start: 'echo Running task now..',
+    },
+  },
   typechain: {
     outDir: './frontend/typechain',
     target: 'ethers-v5',
   },
   abiExporter: [
     {
-      path: './abi/pretty',
-      pretty: true,
-    },
-    {
       path: './frontend/contracts',
       clear: true,
       only: ['UserData.sol'],
       rename: (_: string, contractName: string) =>
         `${contractName}/${contractName}`,
+      runOnCompile: true,
+      pretty: false,
+    },
+    {
+      path: './frontend/contracts',
+      format: 'minimal',
+      clear: true,
+      only: ['UserData.sol'],
+      rename: (_: string, contractName: string) =>
+        `${contractName}/${contractName}.min`,
       runOnCompile: true,
       pretty: false,
     },

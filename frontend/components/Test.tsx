@@ -1,33 +1,43 @@
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
+import { useWeb3React } from '@web3-react/core'
 import useContract, {
   registerUser,
   setContract,
 } from 'context/hooks/useContract'
-import { usePriorityProvider } from 'context/hooks/useProvider'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { UserData } from 'typechain'
 
 interface TestProps {}
 
 const Test: React.FC<TestProps> = () => {
-  const { provider, account } = usePriorityProvider()
-  const { users } = useContract()
+  const { provider, account } = useWeb3React()
+  const { userInvest } = useContract()
+  const [invest, setInvest] = useState<UserData.InvestStructOutput[]>([])
 
   useEffect(() => {
-    console.log(account)
-    if (account)
-      users(account).then((res) => {
-        console.log(res)
-      })
-  }, [users, account])
+    if (account && userInvest)
+      userInvest(account)
+        .then((res) => setInvest(res))
+        .catch((err) => console.log(err))
+  }, [account, userInvest])
 
   useEffect(() => {
     if (provider) setContract(provider)
   }, [provider])
 
   return (
-    <Button onClick={() => (account ? registerUser(account) : undefined)}>
-      Register
-    </Button>
+    <Box>
+      <Button
+        onClick={() =>
+          account
+            ? registerUser('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266')
+            : undefined
+        }
+      >
+        Register
+      </Button>
+      <div>{invest[0]?.amount?.toNumber()}</div>
+    </Box>
   )
 }
 

@@ -1,11 +1,11 @@
-import { Card, Stack } from "@mui/material";
-import TButton from "elements/TButton";
-import useUserContract from "hooks/useUserContract";
+import { Card, Stack } from '@mui/material'
+import useUserContract from 'hooks/useUserContract'
+import TButton from 'theme/elements/TButton'
 
 interface RandomProps {}
 
 const Random: React.FC<RandomProps> = () => {
-  const { random } = useUserContract();
+  const { random } = useUserContract()
 
   return (
     <Card>
@@ -13,7 +13,7 @@ const Random: React.FC<RandomProps> = () => {
         <TButton onClick={() => random()}>Random</TButton>
       </Stack>
     </Card>
-  );
-};
+  )
+}
 
-export default Random;
+export default Random

@@ -1,12 +1,12 @@
 import useSettings, { setTranslate } from 'context/hooks/useSettings'
 import { throttle } from 'helpers'
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 export const useCenteredTree = () => {
   const containerElem = useRef<HTMLDivElement>()
   const { translate, loading } = useSettings()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const resize = () => {
       if (containerElem.current) {
         console.log('resize')

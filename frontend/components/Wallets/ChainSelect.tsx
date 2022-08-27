@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import { Stack } from '@mui/system'
 import { CHAINS } from 'context/data/provider/chains'
-import TButton from 'elements/TButton'
+import TButton from 'theme/elements/TButton'
 
 interface ChainSelectProps extends ButtonProps {
   title: string

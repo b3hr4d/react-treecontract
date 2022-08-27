@@ -1,15 +1,15 @@
-import Card from "@mui/material/Card";
-import Stack from "@mui/material/Stack";
-import TButton from "elements/TButton";
-import TInput from "elements/TInput";
-import useUserContract from "hooks/useUserContract";
-import { useState } from "react";
+import Card from '@mui/material/Card'
+import Stack from '@mui/material/Stack'
+import useUserContract from 'hooks/useUserContract'
+import { useState } from 'react'
+import TButton from 'theme/elements/TButton'
+import TInput from 'theme/elements/TInput'
 
 interface LoopProps {}
 
 const Loop: React.FC<LoopProps> = () => {
-  const [num, setNum] = useState(100);
-  const { loop } = useUserContract();
+  const [num, setNum] = useState(100)
+  const { loop } = useUserContract()
 
   return (
     <Card>
@@ -25,7 +25,7 @@ const Loop: React.FC<LoopProps> = () => {
         <TButton onClick={() => loop(num)}>Loop</TButton>
       </Stack>
     </Card>
-  );
-};
+  )
+}
 
-export default Loop;
+export default Loop

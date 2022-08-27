@@ -4,7 +4,7 @@ import { updateDatabase } from 'context/hooks/useDatabase'
 import { setLoading } from 'context/hooks/useSettings'
 import type { RootModel } from 'context/store'
 import UserData from 'contracts'
-import { investMaker, throttle, userInit } from 'helpers'
+import { jsInvestMaker, throttle, userInit } from 'helpers'
 
 export const contract = new UserData('0x0', userInit('0xstart'))
 
@@ -33,7 +33,7 @@ const database = createModel<RootModel>()({
     registerUser: async ({ user, referrer }) => {
       console.log('Registering: ', user, referrer)
       contract.users[user] = userInit()
-      contract.register(user, referrer, investMaker())
+      contract.register(user, referrer, jsInvestMaker())
 
       throttle(() => {
         setLoading(false)

@@ -7,8 +7,9 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material'
+import { useWeb3React } from '@web3-react/core'
 import ChainChanger from 'components/Wallets/ChainChanger'
-import { setModal, useAccount } from 'context/hooks'
+import { setModal } from 'context/hooks'
 import useDatabase from 'context/hooks/useDatabase'
 import { getEllipsis, toUsd } from 'helpers'
 
@@ -16,7 +17,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
   const { total } = useDatabase()
-  const account = useAccount()
+  const { account } = useWeb3React()
 
   return (
     <AppBar position="fixed">

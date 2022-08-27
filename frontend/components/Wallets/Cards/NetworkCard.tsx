@@ -1,5 +1,5 @@
 import { hooks, network } from 'context/data/provider/connectors/network'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import WalletCard from '../WalletCard'
 
 const {
@@ -23,11 +23,11 @@ export default function NetworkCard() {
 
   const [error, setError] = useState<Error>()
   // attempt to connect eagerly on mount
-  useEffect(() => {
-    void network.activate().catch(() => {
-      console.debug('Failed to connect to network')
-    })
-  }, [])
+  // useEffect(() => {
+  //   void network.activate().catch(() => {
+  //     console.debug('Failed to connect to network')
+  //   })
+  // }, [])
 
   return (
     <WalletCard

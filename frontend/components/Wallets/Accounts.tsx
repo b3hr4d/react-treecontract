@@ -2,8 +2,8 @@ import { formatEther } from '@ethersproject/units'
 import { List, ListItem, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import type { Web3ReactHooks } from '@web3-react/core'
-import TAddress from 'elements/TAddress'
 import useBalances from 'hooks/useBalances'
+import TAddress from 'theme/elements/TAddress'
 
 interface AccountsProps {
   accounts: ReturnType<Web3ReactHooks['useAccounts']>

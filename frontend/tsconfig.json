@@ -23,5 +23,5 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "next.config.js"]
+  "exclude": ["node_modules", "next.config.js", "**/*.min.ts"]
 }
