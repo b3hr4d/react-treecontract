@@ -1,32 +1,32 @@
-import { config as dotEnvConfig } from "dotenv";
-import { HardhatUserConfig } from "hardhat/config";
+import { config as dotEnvConfig } from 'dotenv'
+import { HardhatUserConfig } from 'hardhat/config'
 
-import "@nomicfoundation/hardhat-toolbox";
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-etherscan";
-import "@typechain/hardhat";
-import "hardhat-abi-exporter";
+import '@nomicfoundation/hardhat-toolbox'
+import '@nomiclabs/hardhat-ethers'
+import '@nomiclabs/hardhat-etherscan'
+import '@typechain/hardhat'
+import 'hardhat-abi-exporter'
 
-dotEnvConfig();
+dotEnvConfig()
 
-const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY!; // well known private key
-const BINANCE_API_KEY = process.env.BINANCE_API_KEY;
-const INFURA_KOVAN = process.env.INFURA_KOVAN;
+const ACCOUNT_PRIVATE_KEY = process.env.ACCOUNT_PRIVATE_KEY! // well known private key
+const BINANCE_API_KEY = process.env.BINANCE_API_KEY
+const INFURA_KOVAN = process.env.INFURA_KOVAN
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: 'hardhat',
   networks: {
     localhost: {
-      url: "http://127.0.0.1:8545",
+      url: 'http://127.0.0.1:8545',
     },
     testnet: {
-      url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+      url: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
       chainId: 97,
       gasPrice: 20000000000,
       accounts: [ACCOUNT_PRIVATE_KEY],
     },
     mainnet: {
-      url: "https://bsc-dataseed.binance.org/",
+      url: 'https://bsc-dataseed.binance.org/',
       chainId: 56,
       gasPrice: 20000000000,
       accounts: [ACCOUNT_PRIVATE_KEY],
@@ -40,23 +40,23 @@ const config: HardhatUserConfig = {
       accounts: [ACCOUNT_PRIVATE_KEY],
     },
     coverage: {
-      url: "http://127.0.0.1:8555",
+      url: 'http://127.0.0.1:8555',
     },
   },
   typechain: {
-    outDir: "./src/typechain",
-    target: "ethers-v5",
+    outDir: './frontend/src/typechain',
+    target: 'ethers-v5',
   },
   abiExporter: [
     {
-      path: "./abi/pretty",
+      path: './abi/pretty',
       pretty: true,
     },
     {
-      path: "./src/contracts",
-      format: "minimal",
+      path: './src/contracts',
+      format: 'minimal',
       clear: true,
-      only: ["UserData.sol"],
+      only: ['UserData.sol'],
       rename: (_: string, contractName: string) =>
         `${contractName}/${contractName}`,
       runOnCompile: true,
@@ -66,7 +66,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: "0.8.9",
+        version: '0.8.9',
         settings: {
           optimizer: {
             enabled: true,
@@ -81,6 +81,6 @@ const config: HardhatUserConfig = {
     // Obtain one at https://etherscan.io/
     apiKey: BINANCE_API_KEY,
   },
-};
+}
 
-export default config;
+export default config

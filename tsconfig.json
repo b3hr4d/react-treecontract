@@ -17,11 +17,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": "src"
-  },
-  "exclude": ["node_modules"],
-  "include": ["./src", "./scripts", "./test"],
-  "files": ["./hardhat.config.ts"]
+    "noEmit": true
+  }
 }
