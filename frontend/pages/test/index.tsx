@@ -8,8 +8,6 @@ import Layout from 'layouts'
 function App() {
   return (
     <Layout>
-      {/* <RegisterBar /> */}
-      {/* <TreeCanvas /> */}
       <Test />
       <ConnectWallet />
     </Layout>
