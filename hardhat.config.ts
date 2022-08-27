@@ -44,7 +44,7 @@ const config: HardhatUserConfig = {
     },
   },
   typechain: {
-    outDir: './frontend/src/typechain',
+    outDir: './frontend/typechain',
     target: 'ethers-v5',
   },
   abiExporter: [
@@ -53,8 +53,7 @@ const config: HardhatUserConfig = {
       pretty: true,
     },
     {
-      path: './src/contracts',
-      format: 'minimal',
+      path: './frontend/contracts',
       clear: true,
       only: ['UserData.sol'],
       rename: (_: string, contractName: string) =>
