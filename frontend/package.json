@@ -12,6 +12,7 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.0",
     "@rematch/core": "^2.2.0",
+    "@rematch/loading": "^2.1.2",
     "@walletconnect/ethereum-provider": "^1.8.0",
     "@walletconnect/jsonrpc-http-connection": "^1.0.3",
     "@walletconnect/jsonrpc-provider": "^1.0.5",
