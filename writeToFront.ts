@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export default (fileName: string, address: string) => {
+export default async (fileName: string, address: string) => {
   const path = `${__dirname}/frontend/contracts/${fileName}/${fileName}.min.json`
 
   const JsonUserData = require(path)

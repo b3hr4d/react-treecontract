@@ -6,7 +6,10 @@ import type { RootModel } from 'context/store'
 import UserData from 'contracts'
 import { jsInvestMaker, throttle, userInit } from 'helpers'
 
-export const contract = new UserData('0x0', userInit('0xstart'))
+export const contract = new UserData(
+  '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  userInit('0x0000000000000000000000000000000000000001'),
+)
 
 const defaultState: UserDataState = {
   users: contract.users,
@@ -22,6 +25,19 @@ const database = createModel<RootModel>()({
 
       return {
         ...state,
+        total: contract.total,
+        userLength: Object.keys(contract.users).length,
+        users: { ...contract.users },
+      }
+    },
+    RESET: () => {
+      console.log('Reset Database')
+      const contract = new UserData(
+        '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+        userInit('0x0000000000000000000000000000000000000001'),
+      )
+
+      return {
         total: contract.total,
         userLength: Object.keys(contract.users).length,
         users: { ...contract.users },

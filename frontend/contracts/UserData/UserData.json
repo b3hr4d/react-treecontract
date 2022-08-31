@@ -126,6 +126,31 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "hourly",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "referral",
+        "type": "uint256"
+      }
+    ],
+    "name": "WithdrawInterest",
+    "type": "event"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -187,6 +212,59 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculateHourly",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "rewards",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "calculateInterest",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "hourly",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "referral",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "requestTime",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "",
         "type": "address"
       }
@@ -213,6 +291,25 @@
     "name": "deauthorizeContract",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "depositNumber",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -503,6 +600,11 @@
         "internalType": "uint64",
         "name": "refAmount",
         "type": "uint64"
+      },
+      {
+        "internalType": "uint64",
+        "name": "latestWithdraw",
+        "type": "uint64"
       }
     ],
     "stateMutability": "view",
@@ -519,6 +621,13 @@
     "name": "withdrawBnb",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawInterest",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {

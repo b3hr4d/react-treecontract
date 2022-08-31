@@ -1,17 +1,16 @@
-import { Icon, IconButton, InputAdornment } from "@mui/material";
-import TextField, { OutlinedTextFieldProps } from "@mui/material/TextField";
-import { forwardRef } from "react";
+import { Icon, IconButton, InputAdornment } from '@mui/material'
+import TextField, { OutlinedTextFieldProps } from '@mui/material/TextField'
+import { forwardRef } from 'react'
 
-interface TInputProps extends Omit<OutlinedTextFieldProps, "variant"> {
-  max?: number;
-  min?: number;
-  onClose?: () => void;
+interface TInputProps extends Omit<OutlinedTextFieldProps, 'variant'> {
+  max?: number
+  min?: number
+  onClose?: () => void
 }
 
 const TInput: React.FC<TInputProps> = forwardRef(
   ({ max, min = 0, onClose, InputProps, ...rest }, ref) => (
     <TextField
-      fullWidth
       inputProps={{
         min,
         max,
@@ -30,7 +29,7 @@ const TInput: React.FC<TInputProps> = forwardRef(
       {...rest}
       ref={ref}
     />
-  )
-);
+  ),
+)
 
-export default TInput;
+export default TInput

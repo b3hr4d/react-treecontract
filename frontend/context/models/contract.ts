@@ -7,28 +7,38 @@ import { investMaker } from 'helpers'
 import { UserData } from 'typechain'
 import { ContractState } from '../data/contract'
 
+const state = {
+  initialized: false,
+} as ContractState
+
 const contract = createModel<RootModel>()({
-  state: {} as ContractState,
+  state,
   reducers: {
-    DEPLOY: (_, contract: UserData) => contract,
+    DEPLOY: (_, contract) => ({ ...contract, initialized: true }),
   },
   effects: (dispatch) => ({
-    init: async (provider: Web3Provider) => {
+    init: async (provider: Web3Provider, state) => {
+      if (state.contract.initialized) return
+      console.log('initializing')
       const userData = new ethers.Contract(
         compiled.address,
         compiled.abi,
         provider.getSigner(),
       ) as UserData
 
-      await userData.deployed()
+      dispatch.database.RESET()
+
+      userData.once('Registered', (a, b, c) => {
+        dispatch.database.registerUser({ user: a, referrer: b })
+      })
 
       dispatch.contract.DEPLOY(userData)
     },
-    register: async (payload, state) => {
+    register: async ({ referrer, value }, state) => {
       state.contract.register(
-        payload,
+        referrer,
         investMaker() as unknown as UserData.InvestStruct,
-        { value: '1000000' },
+        { value },
       )
     },
   }),

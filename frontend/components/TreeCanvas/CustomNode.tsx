@@ -1,7 +1,7 @@
 import { Box, Card, Collapse, Icon, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import useSettings, { resetTree, setUser } from 'context/hooks/useSettings'
-import { toUsd } from 'helpers'
+import { getEllipsis, toUsd } from 'helpers'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { CustomNodeProps } from './Types'
 
@@ -44,7 +44,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({
             {__rd3t.collapsed ? 'keyboard_arrow_right' : 'keyboard_arrow_down'}
           </Icon>
           <Typography fontWeight="500" onClick={changeUser}>
-            {showAddress ? name : toUsd(total, true)}
+            {showAddress ? getEllipsis(name, 2) : toUsd(total, true)}
           </Typography>
           <Icon onClick={() => setOpen((prev) => !prev)} fontSize="small">
             {open ? 'info' : 'info_outlined'}

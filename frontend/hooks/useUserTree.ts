@@ -14,6 +14,7 @@ const useUserTree = () => {
 
   const data = useMemo(() => {
     const findTrees = (name: string) => {
+      console.log(name)
       let obj: RawNode = {
         name,
       }

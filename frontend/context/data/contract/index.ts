@@ -1,3 +1,5 @@
 import type { UserData } from 'typechain'
 
-export type ContractState = UserData
+export interface ContractState extends UserData {
+  initialized: boolean
+}

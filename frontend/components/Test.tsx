@@ -30,7 +30,10 @@ const Test: React.FC<TestProps> = () => {
       <Button
         onClick={() =>
           account
-            ? registerUser('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266')
+            ? registerUser(
+                '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+                '1000000000',
+              )
             : undefined
         }
       >

@@ -3,10 +3,17 @@ pragma solidity ^0.8.9;
 
 import './Secure.sol';
 import './64Math.sol';
+import './Math.sol';
 
 contract UserData is Secure {
-    using Math for uint64;
+    using SixFourMath for uint64;
+    using Math for uint256;
 
+    event WithdrawInterest(
+        address indexed user,
+        uint256 hourly,
+        uint256 referral
+    );
     event Registered(address indexed user, address indexed ref, uint256 amount);
     event ReferralReceived(address indexed user, address from, uint256 amount);
 
@@ -18,11 +25,12 @@ contract UserData is Secure {
     }
 
     struct UserStruct {
+        Invest[] invest;
         address ref;
         address left;
         address right;
         uint64 refAmount;
-        Invest[] invest;
+        uint64 latestWithdraw;
     }
 
     mapping(address => UserStruct) public users;
@@ -42,6 +50,65 @@ contract UserData is Secure {
         users[_msgSender()].invest.push(invest);
 
         emit Registered(_msgSender(), ref, amount);
+    }
+
+    function withdrawInterest() public payable {
+        require(exist(_msgSender()), 'User Not Exist');
+
+        (uint256 hourly, uint256 referral, ) = calculateInterest(_msgSender());
+
+        uint256 totalUsdReward = hourly.add(referral);
+
+        // require(resetAfterWithdraw(_msgSender()), 'TREE::WFA');
+
+        if (totalUsdReward > 0) {
+            _safeTransferETH(_msgSender(), totalUsdReward);
+        }
+        emit WithdrawInterest(_msgSender(), hourly, referral);
+    }
+
+    function calculateInterest(address user)
+        public
+        view
+        returns (
+            uint256 hourly,
+            uint256 referral,
+            uint256 requestTime
+        )
+    {
+        uint256 latestWithdraw = users[user].latestWithdraw;
+        referral = users[user].refAmount;
+
+        requestTime = block.timestamp;
+
+        if (latestWithdraw.addHour() <= requestTime) {
+            hourly = calculateHourly(user, requestTime);
+        }
+        return (hourly, referral, requestTime);
+    }
+
+    function calculateHourly(address user, uint256 time)
+        public
+        view
+        returns (uint256 rewards)
+    {
+        uint256 userIvestLength = depositNumber(user);
+        for (uint8 i = 0; i < userIvestLength; i++) {
+            uint256 reward = users[user].invest[i].reward;
+            if (reward > 0) {
+                uint256 startTime = users[user].invest[i].startTime;
+                uint256 lw = users[user].latestWithdraw;
+                if (lw < startTime) lw = startTime;
+                if (time >= lw.addHour()) {
+                    uint256 hour = time.sub(lw).toHours();
+                    rewards = rewards.add(hour.mul(reward));
+                }
+            }
+        }
+    }
+
+    function depositNumber(address user) public view returns (uint256) {
+        return users[user].invest.length;
     }
 
     function updateReferrer(address user, uint64 amount) internal {

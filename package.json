@@ -31,6 +31,7 @@
     "run-node": "npx hardhat node",
     "watch": "npx hardhat watch deploy",
     "compile": "npx hardhat compile",
+    "transfer": "npx hardhat run ./scripts/transfer.ts",
     "deploy": "npx hardhat run ./scripts/deploy.ts",
     "dev": "cd ./frontend && yarn dev",
     "start": "cd ./frontend && yarn start",

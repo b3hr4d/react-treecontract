@@ -6,7 +6,7 @@ import { throttle } from 'helpers'
 
 const defaultState: SettingsState = {
   translate: { x: 0, y: 0, height: 500, width: 0 },
-  user: '0x0',
+  user: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
   loading: true,
   showAddress: true,
   showDetails: false,
