@@ -1,5 +1,7 @@
 import { Web3Provider } from '@ethersproject/providers'
 import { createModel } from '@rematch/core'
+import { errorCompiler } from 'context/data/contract/errorHandler'
+import { setSnackbar } from 'context/hooks'
 import { RootModel } from 'context/store'
 import compiled from 'contracts/UserData/UserData.min.json'
 import { ethers } from 'ethers'
@@ -28,18 +30,25 @@ const contract = createModel<RootModel>()({
 
       dispatch.database.RESET()
 
-      userData.once('Registered', (a, b, c) => {
+      userData.on('Registered', (a, b, c) => {
+        console.log(a)
         dispatch.database.registerUser({ user: a, referrer: b })
       })
 
       dispatch.contract.DEPLOY(userData)
     },
     register: async ({ referrer, value }, state) => {
-      state.contract.register(
-        referrer,
-        investMaker() as unknown as UserData.InvestStruct,
-        { value },
-      )
+      state.contract
+        .register(referrer, investMaker() as unknown as UserData.InvestStruct, {
+          value,
+        })
+        .then((e) => {
+          console.log(e)
+        })
+        .catch((err) => {
+          const msg = errorCompiler(err)
+          setSnackbar({ message: msg })
+        })
     },
   }),
 })

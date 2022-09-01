@@ -1,0 +1,18 @@
+{
+  "OWN": "Only From Owner!",
+  "ONC": "Only from contract!",
+  "BLK": "User blackListed!",
+  "TKN": "Token transfer failed!",
+  "ETH": "BNB transfer Failed!",
+  "VAL": "Value is low",
+  "INF": "Investment failed!",
+  "REF": "Referrer not exist!",
+  "UNE": "User not exist!",
+  "RAL": "Right and Left is Full!",
+  "USR": "User exist!",
+  "LCK": "No re-entrancy!",
+  "NEX": "No re-entrancy!",
+  "LOW": "Withdraw is low!",
+  "WFA": "Withdraw Failed!",
+  "NUP": "Not Upgradable!"
+}

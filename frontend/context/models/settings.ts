@@ -1,6 +1,11 @@
 import { Color, colors } from '@mui/material'
 import { createModel } from '@rematch/core'
-import { Colors, SettingsState } from 'context/data/settings'
+import {
+  Colors,
+  SettingsState,
+  SnackBarType,
+  Translate,
+} from 'context/data/settings'
 import { RootModel } from 'context/store'
 import { throttle } from 'helpers'
 
@@ -9,6 +14,10 @@ const defaultState: SettingsState = {
   user: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
   loading: true,
   showAddress: true,
+  showSnackBar: false,
+  snackbar: {
+    message: '',
+  },
   showDetails: false,
   color: colors['blue'],
   modal: false,
@@ -25,15 +34,26 @@ const settings = createModel<RootModel>()({
       ...state,
       modal,
     }),
+    SET_SNACKBAR: (state, snackbar: SnackBarType) => ({
+      ...state,
+      snackbar,
+      showSnackBar: true,
+    }),
     SET_LOADING: (state, loading: boolean) => ({
       ...state,
       loading,
     }),
-    SET_TRANSLATE: (state, translate) => ({
+    SET_TRANSLATE: (state, translate: Translate) => ({
       ...state,
       loading: false,
       translate,
     }),
+    SHOW_SNACKBAR: (state, showSnackBar: boolean) => {
+      return {
+        ...state,
+        showSnackBar,
+      }
+    },
     SHOW_ADDRESS: (state) => {
       return {
         ...state,

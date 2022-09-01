@@ -31,7 +31,7 @@ async function main() {
     console.log(address)
     await signer.sendTransaction({
       to: address,
-      value: ethers.utils.parseEther('1000'),
+      value: ethers.utils.parseEther('100'),
     })
   }
 }

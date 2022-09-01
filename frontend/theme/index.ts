@@ -1,2 +1,2 @@
 export * from './elements'
-export { default as ThemeProvider } from './ThemeProvider'
+export { default as MainProvider } from './ThemeProvider'

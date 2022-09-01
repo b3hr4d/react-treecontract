@@ -7,7 +7,7 @@ import connectors from 'context/data/provider/connectors'
 import store from 'context/store'
 import { StrictMode } from 'react'
 import { Provider } from 'react-redux'
-import { ThemeProvider } from 'theme'
+import { MainProvider } from 'theme'
 import './styles.css'
 
 export default function App({ Component, pageProps }) {
@@ -15,13 +15,13 @@ export default function App({ Component, pageProps }) {
     <StrictMode>
       <Web3ReactProvider connectors={connectors} lookupENS={false}>
         <Provider store={store}>
-          <ThemeProvider>
+          <MainProvider>
             <Header />
             <Toolbar />
             <Body>
               <Component {...pageProps} />
             </Body>
-          </ThemeProvider>
+          </MainProvider>
         </Provider>
       </Web3ReactProvider>
     </StrictMode>

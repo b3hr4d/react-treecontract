@@ -1,9 +1,9 @@
 import { FormControlLabel, Stack, Switch } from '@mui/material'
 import useSettings, {
   resetTree,
+  setShowAddress,
+  setShowDetails,
   setUser,
-  setUserAddress,
-  setUserDetails,
 } from 'context/hooks/useSettings'
 import { useCallback, useEffect, useState } from 'react'
 import TButton from 'theme/elements/TButton'
@@ -52,13 +52,13 @@ const Controller: React.FC<ControllerProps> = () => {
           control={<Switch color="primary" checked={showAddress} />}
           label="Address"
           labelPlacement="start"
-          onClick={setUserAddress}
+          onClick={setShowAddress}
         />
         <FormControlLabel
           control={<Switch color="primary" checked={showDetails} />}
           label="Details"
           labelPlacement="start"
-          onClick={setUserDetails}
+          onClick={setShowDetails}
         />
       </Stack>
     </Stack>

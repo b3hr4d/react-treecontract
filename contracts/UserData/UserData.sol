@@ -40,8 +40,8 @@ contract UserData is Secure {
     }
 
     function register(address ref, Invest memory invest) public payable {
-        require(notExist(_msgSender()), 'User Exist');
-        require(exist(ref), 'Ref Not Exist');
+        require(notExist(_msgSender()), 'USR');
+        require(exist(ref), 'REF');
 
         uint64 amount = invest.amount;
         updateReferrer(ref, amount);
@@ -53,7 +53,7 @@ contract UserData is Secure {
     }
 
     function withdrawInterest() public payable {
-        require(exist(_msgSender()), 'User Not Exist');
+        require(exist(_msgSender()), 'UNE');
 
         (uint256 hourly, uint256 referral, ) = calculateInterest(_msgSender());
 
@@ -112,7 +112,7 @@ contract UserData is Secure {
     }
 
     function updateReferrer(address user, uint64 amount) internal {
-        require(isFree(user), 'Right and Left is Full');
+        require(isFree(user), 'RAL');
 
         if (users[user].left == address(0)) users[user].left = _msgSender();
         else users[user].right = _msgSender();

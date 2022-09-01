@@ -1,4 +1,4 @@
-import { Colors, Translate } from 'context/data/settings'
+import { Colors, SnackBarType, Translate } from 'context/data/settings'
 import store, { RootState } from 'context/store'
 import { useSelector } from 'react-redux'
 
@@ -11,9 +11,15 @@ export const setModal = (modal: boolean) =>
 export const setLoading = (loading: boolean) =>
   store.dispatch.settings.SET_LOADING(loading)
 
-export const setUserAddress = () => store.dispatch.settings.SHOW_ADDRESS()
+export const setShowSnackbar = (snackbar: boolean) =>
+  store.dispatch.settings.SHOW_SNACKBAR(snackbar)
 
-export const setUserDetails = () => store.dispatch.settings.SHOW_DETAILS()
+export const setShowAddress = () => store.dispatch.settings.SHOW_ADDRESS()
+
+export const setShowDetails = () => store.dispatch.settings.SHOW_DETAILS()
+
+export const setSnackbar = (props: SnackBarType) =>
+  store.dispatch.settings.SET_SNACKBAR(props)
 
 export const setUser = (user: string) =>
   store.dispatch.settings.CHANGE_ADDRESS(user)

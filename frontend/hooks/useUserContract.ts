@@ -1,4 +1,4 @@
-import useUserData, { registerUser } from 'context/hooks/useDatabase'
+import useUserData, { registerDatabase } from 'context/hooks/useDatabase'
 import { setLoading } from 'context/hooks/useSettings'
 import { contract } from 'context/models/database'
 import { address } from 'contracts'
@@ -22,7 +22,7 @@ const useUserContract = () => {
     (ref: number) => {
       const user = findAddress()
       const referrer = address(ref)
-      registerUser(user, referrer)
+      registerDatabase(user, referrer)
     },
     [findAddress],
   )
@@ -42,7 +42,7 @@ const useUserContract = () => {
   const random = useCallback(async () => {
     const user = findAddress()
     const referrer = await findRandomRef()
-    registerUser(user, referrer)
+    registerDatabase(user, referrer)
   }, [findAddress, findRandomRef])
 
   const loop = useCallback(
@@ -51,7 +51,7 @@ const useUserContract = () => {
       for (let i = userLength; i < userLength + num; i++) {
         const user = address(i)
         const referrer = await findRandomRef(i - 1)
-        registerUser(user, referrer)
+        registerDatabase(user, referrer)
       }
     },
     [findRandomRef, userLength],
