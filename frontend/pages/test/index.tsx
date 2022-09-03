@@ -5,7 +5,7 @@ import Test from 'components/Test'
 import ConnectWallet from 'components/Wallets'
 import Layout from 'layouts'
 
-function App() {
+const Index = () => {
   return (
     <Layout>
       <Test />
@@ -14,4 +14,4 @@ function App() {
   )
 }
 
-export default App
+export default Index
