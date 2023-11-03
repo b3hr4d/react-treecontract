@@ -59,8 +59,6 @@ contract UserData is Secure {
 
         uint256 totalUsdReward = hourly.add(referral);
 
-        // require(resetAfterWithdraw(_msgSender()), 'TREE::WFA');
-
         if (totalUsdReward > 0) {
             _safeTransferETH(_msgSender(), totalUsdReward);
         }

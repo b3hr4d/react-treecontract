@@ -12,7 +12,7 @@ const ChainChanger: React.FC<ChainChangerProps> = () => {
   return (
     <Select
       size="small"
-      value={chainId || 31337}
+      value={chainId || 56}
       onChange={(event) => {
         switchChain(Number(event.target.value))
       }}
